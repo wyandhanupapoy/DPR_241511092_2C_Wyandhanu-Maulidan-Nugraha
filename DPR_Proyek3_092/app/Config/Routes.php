@@ -6,3 +6,21 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+
+// Authentication Routes
+$routes->group('auth', function($routes) {
+    $routes->get('login', 'Auth::login');
+    $routes->post('processLogin', 'Auth::processLogin');
+    $routes->get('register', 'Auth::register');
+    $routes->match(['get', 'post'], 'auth/register', 'Auth::register');
+    $routes->post('processRegister', 'Auth::processRegister');
+    $routes->get('logout', 'Auth::logout');
+});
+
+// Dashboard Routes (Protected)
+$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
+
+// Admin Routes (Protected)
+$routes->group('admin', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'Dashboard::index');
+});
