@@ -112,14 +112,6 @@
                             </button>
                         </div>
                     </form>
-
-                    <div class="text-center mt-4">
-                        <p class="text-muted">Belum punya akun? 
-                            <a href="<?= base_url('auth/register') ?>" class="text-decoration-none fw-bold">
-                                Daftar di sini
-                            </a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
