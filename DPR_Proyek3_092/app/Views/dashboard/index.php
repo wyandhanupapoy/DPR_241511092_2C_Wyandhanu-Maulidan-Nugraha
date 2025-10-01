@@ -3,385 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?></title>
+    <title><?= esc($title ?? 'Dashboard') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
         }
-        .navbar {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        nav {
+            background: #263859;
+            color: #fff;
+            margin-bottom: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: white !important;
-        }
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-        .welcome-card {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .welcome-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        .stats-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .salary-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-        .transparency-card {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-        .btn-logout {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-            border: none;
-            border-radius: 25px;
-            padding: 8px 20px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn-logout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-        .alert {
-            border-radius: 15px;
-            border: none;
-        }
-        .salary-amount {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-        }
-        .dpr-logo {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
+        .nav-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            justify-content: space-between;
+            padding: 12px 24px;
         }
-        .data-table {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 500;
+            transition: color 0.2s;
         }
-        .table th {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            border: none;
+        nav a:last-child {
+            margin-right: 0;
+        }
+        nav a:hover {
+            color: #f7b731;
+        }
+        .user-info {
+            font-weight: 500;
+            margin-right: 16px;
+        }
+        .container {
+            background: #fff;
+            margin: 32px auto;
+            padding: 32px 36px 28px 36px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            width: 95%;
+            max-width: 950px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #263859;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #263859;
+            margin-bottom: 8px;
+            margin-top: 28px;
+        }
+        ul {
+            padding-left: 22px;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        ul li {
+            margin-bottom: 4px;
+        }
+        .success-message {
+            color: #155724;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 10px 16px;
+            border-radius: 5px;
+            margin-bottom: 18px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 18px;
+            background: #fafbfc;
+        }
+        table th, table td {
+            border: 1px solid #d1d5db;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        table th {
+            background: #e3e8ee;
+            color: #263859;
             font-weight: 600;
         }
-        .table td {
+        table tr:nth-child(even) {
+            background: #f4f6f8;
+        }
+        .quick-actions {
+            margin-top: 24px;
+        }
+        .quick-actions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .quick-actions li {
+            display: inline-block;
+            margin-right: 18px;
+            margin-bottom: 8px;
+        }
+        .quick-actions a {
+            background: #3f72af;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
             border: none;
-            padding: 15px;
-            vertical-align: middle;
+            display: inline-block;
         }
-        .table tbody tr:hover {
-            background-color: #f8f9fa;
+        .quick-actions a:hover {
+            background: #263859;
         }
-        .badge-salary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
+        @media (max-width: 700px) {
+            .container {
+                padding: 14px 4px;
+            }
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 8px;
+            }
+            .quick-actions li {
+                display: block;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="<?= base_url('dashboard') ?>">
-                <div class="dpr-logo">
-                    <i class="fas fa-landmark text-primary"></i>
-                </div>
-                <span>APLIKASI PENGHITUNGAN & TRANSPARANSI GAJI DPR</span>
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('dashboard') ?>">
-                            <i class="fas fa-home me-2"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-chart-bar me-2"></i>Laporan
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-calculator me-2"></i>Kalkulator
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-2"></i><?= $user['nama_depan'] . ' ' . $user['nama_belakang'] ?>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Pengaturan</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= base_url('auth/logout') ?>"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+    <?php
+        // Ensure $user and other variables exist to prevent notices
+        $user = $user ?? ['nama_depan' => '', 'nama_belakang' => '', 'role' => null];
+        $anggota = $anggota ?? [];
+        $komponen_gaji = $komponen_gaji ?? [];
+        $total_anggota = $total_anggota ?? (is_array($anggota) ? count($anggota) : 0);
+        $gaji_pokok = $gaji_pokok ?? null;
+        $total_anggaran = $total_anggaran ?? null;
+    ?>
+    <nav>
+        <div class="nav-container">
+            <div>
+                <a href="<?= base_url('dashboard') ?>"><b>Dashboard</b></a>
+                <a href="#">Laporan</a>
+                <a href="#">Kalkulator</a>
+            </div>
+            <div>
+                <span class="user-info"><?= esc(trim(($user['nama_depan'] ?? '') . ' ' . ($user['nama_belakang'] ?? ''))) ?></span>
+                <a href="<?= base_url('auth/logout') ?>">Logout</a>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <!-- Flash Messages -->
+    <div class="container">
         <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle me-2"></i>
+            <div class="success-message">
                 <?= session()->getFlashdata('success') ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php endif; ?>
 
-        <!-- Welcome Card -->
+        <h2>Selamat Datang di Sistem Transparansi Gaji DPR</h2>
+        <p style="margin-bottom:18px;">Aplikasi berbasis web untuk penghitungan dan transparansi gaji anggota DPR RI. Data yang ditampilkan bersifat informatif dan transparan.</p>
+
+        <!-- Statistics Section -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Anggota DPR</h5>
+                        <p class="card-text"><?= esc($total_anggota) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Gaji Pokok per Bulan</h5>
+                        <p class="card-text">
+                            <?php if ($gaji_pokok !== null): ?>
+                                <?= 'Rp ' . number_format($gaji_pokok, 0, ',', '.') ?>
+                            <?php else: ?>
+                                -
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Anggaran Tahunan</h5>
+                        <p class="card-text">
+                            <?php if ($total_anggaran !== null): ?>
+                                <?= 'Rp ' . number_format($total_anggaran, 0, ',', '.') ?>
+                            <?php else: ?>
+                                -
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Tahun Anggaran</h5>
+                        <p class="card-text"><?= date('Y') ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Tables -->
         <div class="row mb-4">
             <div class="col-12">
-                <div class="card welcome-card">
-                    <div class="card-body p-4">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h2 class="card-title mb-2">
-                                    <i class="fas fa-landmark me-2"></i>
-                                    Selamat Datang di Sistem Transparansi Gaji DPR
-                                </h2>
-                                <p class="card-text mb-0">
-                                    Aplikasi berbasis web untuk penghitungan dan transparansi gaji anggota DPR RI. 
-                                    Data yang ditampilkan bersifat informatif dan transparan.
-                                </p>
-                            </div>
-                            <div class="col-md-4 text-end">
-                                <i class="fas fa-balance-scale fa-5x opacity-75"></i>
-                            </div>
-                        </div>
-                    </div>
+                <h3>Data Komponen Gaji Anggota DPR RI</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Komponen Gaji</th>
+                                <th>Jumlah (Rp)</th>
+                                <th>Kategori</th>
+                                <th>Jabatan</th>
+                                <th>Satuan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($komponen_gaji)): ?>
+                                <?php $no = 1; foreach ($komponen_gaji as $kg): ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= esc($kg['nama_komponen'] ?? '') ?></td>
+                                        <td><?= isset($kg['nominal']) ? number_format($kg['nominal'], 0, ',', '.') : '-' ?></td>
+                                        <td><?= esc($kg['kategori'] ?? '') ?></td>
+                                        <td><?= esc($kg['jabatan'] ?? '') ?></td>
+                                        <td><?= esc($kg['satuan'] ?? '') ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr><td colspan="6" class="text-center">Tidak ada data komponen gaji.</td></tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Daftar Anggota DPR</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Lengkap</th>
+                                <th>Gelar Depan</th>
+                                <th>Gelar Belakang</th>
+                                <th>Jabatan</th>
+                                <th>Status Pernikahan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($anggota)): ?>
+                                <?php $no = 1; foreach ($anggota as $a): ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= esc(trim(
+                                            (!empty($a['gelar_depan']) ? $a['gelar_depan'] . ' ' : '') .
+                                            ($a['nama_depan'] ?? '') . ' ' . ($a['nama_belakang'] ?? '') .
+                                            (!empty($a['gelar_belakang']) ? ' ' . $a['gelar_belakang'] : '')
+                                        )) ?></td>
+                                        <td><?= esc($a['gelar_depan'] ?? '') ?></td>
+                                        <td><?= esc($a['gelar_belakang'] ?? '') ?></td>
+                                        <td><?= esc($a['jabatan'] ?? '') ?></td>
+                                        <td><?= esc($a['status_pernikahan'] ?? '') ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr><td colspan="6" class="text-center">Tidak ada data anggota.</td></tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <!-- Statistics Cards -->
-        <div class="row mb-4">
-            <div class="col-md-3 mb-3">
-                <div class="card stats-card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-users fa-3x mb-3"></i>
-                        <h3 class="salary-amount">575</h3>
-                        <p class="mb-0">Total Anggota DPR</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card salary-card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-money-bill-wave fa-3x mb-3"></i>
-                        <h3 class="salary-amount">Rp 15.5M</h3>
-                        <p class="mb-0">Gaji Pokok per Bulan</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card transparency-card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-chart-line fa-3x mb-3"></i>
-                        <h3 class="salary-amount">Rp 8.9T</h3>
-                        <p class="mb-0">Total Anggaran Tahunan</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card stats-card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-calendar-alt fa-3x mb-3"></i>
-                        <h3 class="salary-amount">2024</h3>
-                        <p class="mb-0">Tahun Anggaran</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Data Gaji DPR -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="fas fa-table me-2"></i>Data Komponen Gaji Anggota DPR RI</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="data-table">
-                            <table class="table table-hover mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Komponen Gaji</th>
-                                        <th>Jumlah (Rp)</th>
-                                        <th>Keterangan</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><strong>Gaji Pokok</strong></td>
-                                        <td><span class="badge-salary">15.500.000</span></td>
-                                        <td>Gaji dasar anggota DPR</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><strong>Tunjangan Kehormatan</strong></td>
-                                        <td><span class="badge-salary">7.500.000</span></td>
-                                        <td>Tunjangan kehormatan jabatan</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><strong>Tunjangan Komunikasi</strong></td>
-                                        <td><span class="badge-salary">3.000.000</span></td>
-                                        <td>Biaya komunikasi dan koordinasi</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td><strong>Tunjangan Perumahan</strong></td>
-                                        <td><span class="badge-salary">5.000.000</span></td>
-                                        <td>Bantuan perumahan</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td><strong>Tunjangan Transportasi</strong></td>
-                                        <td><span class="badge-salary">2.000.000</span></td>
-                                        <td>Biaya transportasi dinas</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td><strong>Tunjangan Kesehatan</strong></td>
-                                        <td><span class="badge-salary">1.500.000</span></td>
-                                        <td>Asuransi kesehatan</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td><strong>Uang Kehadiran</strong></td>
-                                        <td><span class="badge-salary">500.000</span></td>
-                                        <td>Per pertemuan sidang</td>
-                                        <td><span class="badge bg-warning">Variabel</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td><strong>Uang Saku</strong></td>
-                                        <td><span class="badge-salary">300.000</span></td>
-                                        <td>Per hari kerja</td>
-                                        <td><span class="badge bg-warning">Variabel</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Grafik dan Analisis -->
+        <!-- Charts Section -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Distribusi Komponen Gaji</h5>
+                    <div class="card-header">
+                        <h5>Distribusi Komponen Gaji</h5>
                     </div>
                     <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="salaryChart"></canvas>
-                        </div>
+                        <canvas id="salaryChart"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Perbandingan Anggaran</h5>
+                    <div class="card-header">
+                        <h5>Perbandingan Anggaran</h5>
                     </div>
                     <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="budgetChart"></canvas>
-                        </div>
+                        <canvas id="budgetChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Informasi Tambahan -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
-                        <h5>Transparansi</h5>
-                        <p class="text-muted">Data gaji DPR ditampilkan secara transparan dan dapat diakses publik</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-calculator fa-3x text-success mb-3"></i>
-                        <h5>Kalkulator</h5>
-                        <p class="text-muted">Hitung total gaji berdasarkan komponen yang dipilih</p>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h3>Menu Utama</h3>
+            <ul>
+                <li><a href="#">Kalkulator Gaji</a></li>
+                <li><a href="#">Laporan Detail</a></li>
+                <li><a href="#">Export Data</a></li>
+                <?php if (!empty($user['role']) && $user['role'] === 'Admin'): ?>
+                    <li><a href="<?= base_url('anggota/create') ?>">Tambah Anggota</a></li>
+                    <li><a href="<?= base_url('anggota') ?>">Lihat Data Anggota</a></li>
+                <?php else: ?>
+                    <li><a href="<?= base_url('auth/logout') ?>">Logout</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Salary Distribution Chart
+            const salaryCtx = document.getElementById('salaryChart').getContext('2d');
+            new Chart(salaryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Gaji Pokok', 'Tunjangan Kehormatan', 'Tunjangan Komunikasi', 'Tunjangan Perumahan'],
+                    datasets: [{
+                        data: [15500000, 7500000, 3000000, 5000000],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Budget Comparison Chart
+            const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+            new Chart(budgetCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'Anggaran (Triliun Rp)',
+                        data: [7.2, 7.8, 8.1, 8.5, 8.9],
+                        backgroundColor: '#36A2EB'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</body>
+</html>
                     </div>
                 </div>
             </div>
