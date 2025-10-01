@@ -26,3 +26,4 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
 // Anggota Routes
 $routes->get('anggota/create', 'Anggota::create');
 $routes->post('anggota/store', 'Anggota::store');
+$routes->get('anggota', 'Anggota::index');

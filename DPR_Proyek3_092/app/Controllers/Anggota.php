@@ -14,6 +14,17 @@ class Anggota extends BaseController
         return view('anggota_create');
     }
 
+    public function index()
+    {
+        // Hanya admin yang boleh akses
+        if (session()->get('role') !== 'Admin') {
+            return redirect()->to('/')->with('error', 'Akses ditolak');
+        }
+        $model = new AnggotaModel();
+        $data['anggota'] = $model->findAll();
+        return view('anggota_list', $data);
+    }
+
     public function store()
     {
         // Hanya admin yang boleh akses

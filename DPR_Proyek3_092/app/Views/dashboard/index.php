@@ -426,6 +426,11 @@
                                     <i class="fas fa-user-plus me-2"></i>Tambah Anggota
                                 </a>
                             </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="<?= base_url('anggota') ?>" class="btn btn-outline-dark w-100">
+                                    <i class="fas fa-users me-2"></i>Lihat Data Anggota
+                                </a>
+                            </div>
                             <?php else: ?>
                             <div class="col-md-3 mb-3">
                                 <a href="<?= base_url('auth/logout') ?>" class="btn btn-logout w-100 text-white">
