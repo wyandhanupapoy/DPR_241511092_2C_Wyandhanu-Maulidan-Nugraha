@@ -420,11 +420,19 @@
                                     <i class="fas fa-download me-2"></i>Export Data
                                 </a>
                             </div>
+                            <?php if (isset($user['role']) && $user['role'] === 'Admin'): ?>
+                            <div class="col-md-3 mb-3">
+                                <a href="<?= base_url('anggota/create') ?>" class="btn btn-outline-warning w-100">
+                                    <i class="fas fa-user-plus me-2"></i>Tambah Anggota
+                                </a>
+                            </div>
+                            <?php else: ?>
                             <div class="col-md-3 mb-3">
                                 <a href="<?= base_url('auth/logout') ?>" class="btn btn-logout w-100 text-white">
                                     <i class="fas fa-sign-out-alt me-2"></i>Logout
                                 </a>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

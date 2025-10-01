@@ -22,3 +22,7 @@ $routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->group('admin', ['filter' => 'auth'], function($routes) {
     $routes->get('dashboard', 'Dashboard::index');
 });
+
+// Anggota Routes
+$routes->get('anggota/create', 'Anggota::create');
+$routes->post('anggota/store', 'Anggota::store');
