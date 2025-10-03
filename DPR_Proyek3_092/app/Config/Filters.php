@@ -28,13 +28,13 @@ class Filters extends BaseFilters
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
+        'admin'         => \App\Filters\AdminFilter::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors'          => Cors::class,
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
-        'auth'          => \App\Filters\AuthFilter::class,
     ];
 
     /**

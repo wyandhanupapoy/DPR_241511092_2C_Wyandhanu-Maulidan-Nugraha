@@ -1,27 +1,19 @@
-<?php
+<?php namespace App\Controllers;
 
-namespace App\Controllers;
+use CodeIgniter\Controller;
 
-class Dashboard extends BaseController
+class Dashboard extends Controller
 {
     public function index()
     {
-        // Check if user is logged in
-        if (!session()->get('is_logged_in')) {
-            return redirect()->to('/auth/login');
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/login');
         }
 
-        $data = [
-            'title' => 'Dashboard',
-            'user' => [
-                'username' => session()->get('username'),
-                'nama_depan' => session()->get('nama_depan'),
-                'nama_belakang' => session()->get('nama_belakang'),
-                'email' => session()->get('email'),
-                'role' => session()->get('role')
-            ]
-        ];
+        $data['username'] = $session->get('username');
+        $data['role'] = $session->get('role');
 
-        return view('dashboard/index', $data);
+        return view('dashboard', $data);
     }
 }
