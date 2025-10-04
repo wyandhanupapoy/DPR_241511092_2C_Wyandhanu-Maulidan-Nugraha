@@ -27,9 +27,12 @@ $routes->group('anggota', ['filter' => 'admin'], static function ($routes) {
     $routes->get('delete/(:num)', 'AnggotaController::delete/$1');
 });
 
-// Routes untuk Komponen Gaji (hanya admin)
+// Rute untuk MELIHAT daftar komponen gaji (butuh login, semua role boleh)
+$routes->get('/komponen-gaji', 'KomponenGajiController::index', ['filter' => 'login']);
+
+// Grup rute untuk MENGELOLA komponen gaji (hanya admin yang boleh)
 $routes->group('komponen-gaji', ['filter' => 'admin'], static function ($routes) {
-    $routes->get('/', 'KomponenGajiController::index');
     $routes->get('create', 'KomponenGajiController::create');
     $routes->post('store', 'KomponenGajiController::store');
+    // Rute update & delete akan kita letakkan di sini nanti
 });
