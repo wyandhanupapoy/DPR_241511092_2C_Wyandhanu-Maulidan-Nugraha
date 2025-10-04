@@ -13,6 +13,13 @@ Laporan Gaji Final
         </a>
     </div>
     <div class="card-body">
+        <form action="<?= site_url('/laporan/gaji-final') ?>" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="keyword" value="<?= esc($keyword ?? '') ?>" placeholder="Cari berdasarkan Nama, Jabatan, ID, atau Total Gaji...">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Cari</button>
+                <a href="<?= site_url('/laporan/gaji-final') ?>" class="btn btn-secondary"><i class="bi bi-arrow-clockwise"></i> Reset</a>
+            </div>
+        </form>
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">

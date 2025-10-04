@@ -15,6 +15,13 @@ Kelola Komponen Gaji
         <?php endif; ?>
     </div>
     <div class="card-body">
+        <form action="<?= site_url('/komponen-gaji') ?>" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="keyword" value="<?= esc($keyword ?? '') ?>" placeholder="Cari berdasarkan Nama, Kategori, Jabatan, dll...">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Cari</button>
+                <a href="<?= site_url('/komponen-gaji') ?>" class="btn btn-secondary"><i class="bi bi-arrow-clockwise"></i> Reset</a>
+            </div>
+        </form>
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">

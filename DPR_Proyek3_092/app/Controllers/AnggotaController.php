@@ -9,13 +9,21 @@ class AnggotaController extends BaseController
 {
     public function index()
     {
-        // 1. Buat instance model
         $model = new AnggotaModel();
 
-        // 2. Ambil semua data menggunakan findAll()
-        $data['anggota'] = $model->findAll();
+        // Ambil kata kunci dari URL (via GET)
+        $keyword = $this->request->getGet('keyword') ?? '';
 
-        // 3. Kirim data ke view
+        // Jika ada kata kunci, panggil fungsi search(). Jika tidak, panggil findAll().
+        if ($keyword) {
+            $data['anggota'] = $model->search($keyword);
+        } else {
+            $data['anggota'] = $model->findAll();
+        }
+
+        // Kirim juga kata kunci ke view untuk ditampilkan di kotak pencarian
+        $data['keyword'] = $keyword;
+
         return view('anggota/index', $data);
     }
 

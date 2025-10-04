@@ -9,7 +9,13 @@ class AuthController extends BaseController
 {
     public function index()
     {
-        // Fungsi ini akan menampilkan halaman login
+        // Cek apakah pengguna sudah login
+        if (session()->get('isLoggedIn')) {
+            // Jika sudah, alihkan langsung ke dashboard
+            return redirect()->to('/dashboard');
+        }
+
+        // Jika belum, tampilkan halaman login
         return view('login_view');
     }
 
@@ -43,11 +49,11 @@ class AuthController extends BaseController
     }
 
     public function logout()
-{
-    // Hancurkan semua data session
-    session()->destroy();
+    {
+        // Hancurkan semua data session
+        session()->destroy();
 
-    // Arahkan kembali ke halaman login dengan pesan
-    return redirect()->to('/login');
-}
+        // Arahkan kembali ke halaman login dengan pesan
+        return redirect()->to('/login');
+    }
 }

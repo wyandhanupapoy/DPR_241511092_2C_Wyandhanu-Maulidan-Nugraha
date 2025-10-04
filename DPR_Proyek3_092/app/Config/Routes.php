@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'AuthController::index');
 
 $routes->get('/login', 'AuthController::index');
 $routes->post('/login/process', 'AuthController::processLogin');
@@ -31,13 +31,16 @@ $routes->group('anggota', ['filter' => 'admin'], static function ($routes) {
 $routes->get('/komponen-gaji', 'KomponenGajiController::index', ['filter' => 'login']);
 
 // Grup rute untuk MENGELOLA komponen gaji (hanya admin yang boleh)
+// Rute untuk MELIHAT daftar komponen gaji (butuh login, semua role boleh)
+$routes->get('/komponen-gaji', 'KomponenGajiController::index', ['filter' => 'login']);
+
+// Grup rute untuk MENGELOLA komponen gaji (hanya admin yang boleh)
 $routes->group('komponen-gaji', ['filter' => 'admin'], static function ($routes) {
     $routes->get('create', 'KomponenGajiController::create');
     $routes->post('store', 'KomponenGajiController::store');
     $routes->get('edit/(:num)', 'KomponenGajiController::edit/$1');
     $routes->post('update/(:num)', 'KomponenGajiController::update/$1');
     $routes->get('delete/(:num)', 'KomponenGajiController::delete/$1');
-    // Rute update & delete akan kita letakkan di sini nanti
 });
 
 // Grup rute untuk Penggajian (hanya admin)
@@ -53,3 +56,6 @@ $routes->add('/laporan', 'LaporanController::index', ['filter' => 'login']);
 
 // ... (di bawah rute /laporan yang sudah ada)
 $routes->get('/laporan/gaji-final', 'LaporanController::gajiFinal', ['filter' => 'login']);
+
+// Rute Laporan Take Home Pay (hanya Admin)
+$routes->get('/laporan/take-home-pay', 'LaporanController::takeHomePay', ['filter' => 'login']);

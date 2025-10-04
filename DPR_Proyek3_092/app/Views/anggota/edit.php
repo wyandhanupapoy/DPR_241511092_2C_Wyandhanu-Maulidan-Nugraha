@@ -38,6 +38,10 @@ Ubah Data Anggota
                         <option value="Cerai Mati" <?= ($anggota['status_pernikahan'] == 'Cerai Mati') ? 'selected' : '' ?>>Cerai Mati</option>
                     </select>
                 </div>
+                <div class="col-md-12 mb-3">
+                    <label for="jumlah_anak" class="form-label">Jumlah Anak</label>
+                    <input type="number" class="form-control" name="jumlah_anak" id="jumlah_anak" value="<?= old('jumlah_anak', $anggota['jumlah_anak'] ?? 0) ?>" required>
+                </div>
             </div>
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Update</button>
