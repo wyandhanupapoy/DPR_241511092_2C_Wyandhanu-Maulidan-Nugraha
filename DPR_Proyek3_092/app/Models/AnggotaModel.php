@@ -29,4 +29,22 @@ class AnggotaModel extends Model
             ->get()
             ->getResultArray();
     }
+
+    public function getLaporanGaji()
+    {
+        // Query ini menggabungkan anggota dengan total gajinya
+        return $this->db->table('anggota a')
+            // Pilih ID dan nama anggota
+            ->select('a.id_anggota, a.nama_depan, a.nama_belakang')
+            // Jumlahkan nominal dari komponen gaji dan beri nama alias 'total_gaji'
+            ->selectSum('kg.nominal', 'total_gaji')
+            // Gabungkan dengan tabel lain menggunakan LEFT JOIN
+            // agar anggota tanpa komponen gaji tetap tampil
+            ->join('penggajian p', 'a.id_anggota = p.id_anggota', 'left')
+            ->join('komponen_gaji kg', 'p.id_komponen_gaji = kg.id_komponen_gaji', 'left')
+            // Kelompokkan hasil berdasarkan ID anggota
+            ->groupBy('a.id_anggota')
+            ->get()
+            ->getResultArray();
+    }
 }

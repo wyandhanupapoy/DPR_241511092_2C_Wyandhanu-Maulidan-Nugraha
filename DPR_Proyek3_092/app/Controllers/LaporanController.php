@@ -10,7 +10,7 @@ class LaporanController extends BaseController
     public function index()
     {
         $anggotaModel = new AnggotaModel();
-        
+
         $data = [
             'all_anggota' => $anggotaModel->findAll(),
             'detail_gaji' => [],
@@ -25,5 +25,15 @@ class LaporanController extends BaseController
         }
 
         return view('laporan/index', $data);
+    }
+
+    public function gajiFinal()
+    {
+        $anggotaModel = new AnggotaModel();
+
+        // Panggil fungsi query laporan yang baru kita buat
+        $data['laporan_gaji'] = $anggotaModel->getLaporanGaji();
+
+        return view('laporan/gaji_final', $data);
     }
 }
