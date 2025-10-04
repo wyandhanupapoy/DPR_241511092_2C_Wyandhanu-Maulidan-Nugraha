@@ -17,4 +17,16 @@ class AnggotaModel extends Model
         'jabatan',
         'status_pernikahan'
     ];
+
+    public function getGajiDetail($id_anggota)
+    {
+        // Menggunakan Query Builder untuk menggabungkan tabel
+        return $this->db->table('anggota a')
+            ->select('a.nama_depan, a.nama_belakang, kg.nama_komponen, kg.nominal')
+            ->join('penggajian p', 'a.id_anggota = p.id_anggota')
+            ->join('komponen_gaji kg', 'p.id_komponen_gaji = kg.id_komponen_gaji')
+            ->where('a.id_anggota', $id_anggota)
+            ->get()
+            ->getResultArray();
+    }
 }

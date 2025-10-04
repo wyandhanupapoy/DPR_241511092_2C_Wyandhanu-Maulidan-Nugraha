@@ -39,3 +39,14 @@ $routes->group('komponen-gaji', ['filter' => 'admin'], static function ($routes)
     $routes->get('delete/(:num)', 'KomponenGajiController::delete/$1');
     // Rute update & delete akan kita letakkan di sini nanti
 });
+
+// Grup rute untuk Penggajian (hanya admin)
+$routes->group('penggajian', ['filter' => 'admin'], static function ($routes) {
+    // ... rute yang sudah ada
+    $routes->get('/', 'PenggajianController::index');
+    $routes->post('store', 'PenggajianController::store');
+    $routes->get('get-komponen/(:num)', 'PenggajianController::getKomponenByAnggota/$1'); // <-- Tambah ini
+});
+
+// Rute untuk Laporan (butuh login, semua role boleh)
+$routes->add('/laporan', 'LaporanController::index', ['filter' => 'login']);
