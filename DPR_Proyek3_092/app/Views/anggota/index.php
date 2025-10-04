@@ -31,8 +31,10 @@
                     <td><?= esc($item['status_pernikahan']) ?></td>
 
                     <?php if (session()->get('role') == 'Admin'): ?>
-                        <td> <a href="<?= site_url('anggota/edit/' . $item['id_anggota']) ?>">Ubah</a>
-                        </td>
+                        <td>
+    <a href="<?= site_url('anggota/edit/' . $item['id_anggota']) ?>">Ubah</a>
+    &nbsp;|&nbsp; <a href="<?= site_url('anggota/delete/' . $item['id_anggota']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</a>
+</td>
                     <?php endif; ?>
 
                 </tr>

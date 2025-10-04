@@ -74,4 +74,15 @@ class AnggotaController extends BaseController
         // Arahkan kembali ke halaman daftar anggota
         return redirect()->to('/anggota');
     }
+
+    // Menghapus data anggota
+    public function delete($id)
+    {
+        $model = new AnggotaModel();
+        // Hapus data anggota spesifik berdasarkan $id
+        $model->delete($id);
+
+        // Arahkan kembali ke halaman daftar anggota
+        return redirect()->to('/anggota');
+    }
 }
