@@ -34,5 +34,7 @@ $routes->get('/komponen-gaji', 'KomponenGajiController::index', ['filter' => 'lo
 $routes->group('komponen-gaji', ['filter' => 'admin'], static function ($routes) {
     $routes->get('create', 'KomponenGajiController::create');
     $routes->post('store', 'KomponenGajiController::store');
+    $routes->get('edit/(:num)', 'KomponenGajiController::edit/$1');
+    $routes->post('update/(:num)', 'KomponenGajiController::update/$1');
     // Rute update & delete akan kita letakkan di sini nanti
 });
