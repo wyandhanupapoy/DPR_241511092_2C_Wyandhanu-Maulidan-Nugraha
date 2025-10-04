@@ -15,3 +15,9 @@ $routes->get('/dashboard', 'DashboardController::index');
 $routes->get('/logout', 'AuthController::logout');
 
 $routes->get('/admin-area', 'DashboardController::adminPage', ['filter' => 'admin']);
+
+$routes->group('anggota', ['filter' => 'admin'], static function ($routes) {
+    $routes->get('/', 'AnggotaController::index');
+    $routes->get('create', 'AnggotaController::create'); // Menampilkan form
+    $routes->post('store', 'AnggotaController::store'); // Menyimpan data
+});
