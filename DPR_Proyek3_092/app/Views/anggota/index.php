@@ -18,6 +18,8 @@
                 <th>Nama Lengkap</th>
                 <th>Jabatan</th>
                 <th>Status Pernikahan</th>
+                <?php if (session()->get('role') == 'Admin'): ?>
+                    <th>Aksi</th> <?php endif; ?>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,12 @@
                     <td><?= esc($item['nama_depan']) . ' ' . esc($item['nama_belakang']) ?></td>
                     <td><?= esc($item['jabatan']) ?></td>
                     <td><?= esc($item['status_pernikahan']) ?></td>
+
+                    <?php if (session()->get('role') == 'Admin'): ?>
+                        <td> <a href="<?= site_url('anggota/edit/' . $item['id_anggota']) ?>">Ubah</a>
+                        </td>
+                    <?php endif; ?>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>

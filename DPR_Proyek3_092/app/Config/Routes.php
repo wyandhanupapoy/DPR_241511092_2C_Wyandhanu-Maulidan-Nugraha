@@ -22,4 +22,6 @@ $routes->group('anggota', ['filter' => 'admin'], static function ($routes) {
     $routes->get('/', 'AnggotaController::index');
     $routes->get('create', 'AnggotaController::create'); // Menampilkan form
     $routes->post('store', 'AnggotaController::store'); // Menyimpan data
+    $routes->get('edit/(:num)', 'AnggotaController::edit/$1');
+    $routes->post('update/(:num)', 'AnggotaController::update/$1');
 });

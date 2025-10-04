@@ -18,7 +18,7 @@ class AnggotaController extends BaseController
         // 3. Kirim data ke view
         return view('anggota/index', $data);
     }
-    
+
     // Fungsi untuk menampilkan form tambah data
     public function create()
     {
@@ -44,5 +44,34 @@ class AnggotaController extends BaseController
 
         // 4. Arahkan pengguna kembali ke halaman lain
         return redirect()->to('/anggota'); // Kita akan buat halaman ini nanti
+    }
+
+    // Menampilkan form edit
+    public function edit($id)
+    {
+        $model = new AnggotaModel();
+        // Ambil data anggota spesifik berdasarkan $id
+        $data['anggota'] = $model->find($id);
+
+        return view('anggota/edit', $data);
+    }
+
+    // Memproses update data
+    public function update($id)
+    {
+        $model = new AnggotaModel();
+
+        $data = [
+            'nama_depan'        => $this->request->getPost('nama_depan'),
+            'nama_belakang'     => $this->request->getPost('nama_belakang'),
+            'jabatan'           => $this->request->getPost('jabatan'),
+            'status_pernikahan' => $this->request->getPost('status_pernikahan'),
+        ];
+
+        // Update data di database
+        $model->update($id, $data);
+
+        // Arahkan kembali ke halaman daftar anggota
+        return redirect()->to('/anggota');
     }
 }
