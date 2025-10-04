@@ -26,3 +26,10 @@ $routes->group('anggota', ['filter' => 'admin'], static function ($routes) {
     $routes->post('update/(:num)', 'AnggotaController::update/$1');
     $routes->get('delete/(:num)', 'AnggotaController::delete/$1');
 });
+
+// Routes untuk Komponen Gaji (hanya admin)
+$routes->group('komponen-gaji', ['filter' => 'admin'], static function ($routes) {
+    $routes->get('/', 'KomponenGajiController::index');
+    $routes->get('create', 'KomponenGajiController::create');
+    $routes->post('store', 'KomponenGajiController::store');
+});

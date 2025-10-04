@@ -18,14 +18,6 @@ CREATE TABLE `anggota` (
   `status_pernikahan` ENUM ('Kawin', 'Belum Kawin', 'Cerai Hidup', 'Cerai Mati')
 );
 
-CREATE TABLE `komponen_gaji` (
-  `id_komponen_gaji` bigint PRIMARY KEY,
-  `nama_komponen` varchar(100) NOT NULL,
-  `kategori` ENUM ('Gaji Pokok', 'Tunjangan Melekat', 'Tunjangan Lain'),
-  `jabatan` ENUM ('Ketua', 'Wakil Ketua', 'Anggota', 'Semua'),
-  `nominal` numeric(17,2) NOT NULL,
-  `satuan` ENUM ('Bulan', 'Hari', 'Periode') NOT NULL
-);
 
 CREATE TABLE `penggajian` (
   `id_komponen_gaji` bigint,
