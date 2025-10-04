@@ -69,4 +69,13 @@ class KomponenGajiController extends BaseController
 
         return redirect()->to('/komponen-gaji');
     }
+
+    // Menghapus data komponen gaji berdasarkan ID
+    public function delete($id)
+    {
+        $model = new KomponenGajiModel();
+        $model->delete($id); // Hapus data dari database
+
+        return redirect()->to('/komponen-gaji');
+    }
 }

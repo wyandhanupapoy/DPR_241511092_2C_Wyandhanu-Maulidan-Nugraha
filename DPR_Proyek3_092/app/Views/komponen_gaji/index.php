@@ -35,8 +35,9 @@
             <td><?= esc($item['satuan']) ?></td>
             <?php if (session()->get('role') == 'Admin'): ?>
                 <td>
-                    <a href="<?= site_url('komponen-gaji/edit/' . $item['id_komponen_gaji']) ?>">Ubah</a>
-                </td>
+    <a href="<?= site_url('komponen-gaji/edit/' . $item['id_komponen_gaji']) ?>">Ubah</a>
+    &nbsp;|&nbsp; <a href="<?= site_url('komponen-gaji/delete/' . $item['id_komponen_gaji']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</a>
+</td>
             <?php endif; ?>
         </tr>
         <?php endforeach; ?>
