@@ -50,3 +50,6 @@ $routes->group('penggajian', ['filter' => 'admin'], static function ($routes) {
 
 // Rute untuk Laporan (butuh login, semua role boleh)
 $routes->add('/laporan', 'LaporanController::index', ['filter' => 'login']);
+
+// ... (di bawah rute /laporan yang sudah ada)
+$routes->get('/laporan/gaji-final', 'LaporanController::gajiFinal', ['filter' => 'login']);
